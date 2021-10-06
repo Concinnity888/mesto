@@ -1,11 +1,11 @@
 .elements {
-  margin-bottom: 67px;
+  margin-bottom: 7px;
 }
 
 @media screen and (max-width: 1023px) {
   .elements {
-    margin-bottom: 48px;
-    padding: 28px 27px 31.6px;
+    margin-bottom: 12px;
+    padding: 0 19px;
     box-sizing: border-box;
   }
 }
