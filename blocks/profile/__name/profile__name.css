@@ -10,8 +10,15 @@
 
 @media screen and (max-width: 767px) {
   .profile__name {
-    margin-left: auto;
+    max-width: 190px;
+    margin: 0 auto;
+    padding-left: 18px;
+
     font-size: 27px;
     line-height: 33px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
