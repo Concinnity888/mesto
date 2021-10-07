@@ -1,7 +1,7 @@
 .header {
+  display: flex;
   margin-bottom: 36px;
   padding: 45px 0 41px;
-
   border-bottom: solid 1px #545454;
 }
 

@@ -5,7 +5,6 @@
   width: 24px;
   height: 24px;
   box-sizing: border-box;
-
   background-color: transparent;
   background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 1.328 2.604 8.767 1.283 7.419 8.66 0 10 1.328ZM0 10l1.962-.588L.585 8.083 0 10Z' fill='%23fff'/%3E%3C/svg%3E");
   background-position: center;
