@@ -8,24 +8,22 @@
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
-  line-height: 50px;
-  vertical-align: middle;
+  line-height: 22px;
   background-color: #000000;
   color: #ffffff;
   border: none;
   border-radius: 2px;
   cursor: pointer;
-  transition: all 0.35s ease;
+  transition: all .35s ease;
 }
 
 .popup__btn-submit:hover {
-  opacity: 0.8;
+  opacity: .8;
 }
 
 @media screen and (max-width: 767px) {
   .popup__btn-submit {
     height: 46px;
-
     font-size: 14px;
     line-height: 46px;
   }

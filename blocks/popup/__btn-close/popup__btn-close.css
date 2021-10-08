@@ -5,29 +5,26 @@
   display: block;
   width: 32px;
   height: 32px;
-  font-size: 0;
   border: none;
   border-radius: 0;
   background-color: transparent;
-  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M32 28.8 19.2 16 32 3.2 28.8 0 16 12.8 3.2 0 0 3.2 12.8 16 0 28.8 3.2 32 16 19.2 28.8 32l3.2-3.2Z' fill='%23fff'/%3E%3C/svg%3E");
+  background-image: url('../../../images/btn-close.svg');
   background-position: center;
   background-repeat: no-repeat;
-  transition: all 0.35s ease;
+  transition: all .35s ease;
   cursor: pointer;
 }
 
 .popup__btn-close:hover {
-  opacity: 0.6;
+  opacity: .6;
 }
 
 @media screen and (max-width: 767px) {
   .popup__btn-close {
     top: -36px;
     right: 0;
-
     width: 20px;
     height: 20px;
-
     background-size: cover;
   }
 }

@@ -1,20 +1,16 @@
 .popup__field {
-  display: flex;
-  align-items: center;
-  height: 37px;
   margin: 0;
   margin-bottom: 20px;
-  padding: 0;
+  padding: 10px 0 9px;
   box-sizing: border-box;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
-  line-height: 37px;
-  vertical-align: middle;
+  line-height: 17px;
   color: #000000;
   border: none;
   border-radius: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
   outline: none;
 }
 

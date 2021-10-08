@@ -5,13 +5,10 @@
   bottom: 0;
   left: 0;
   display: none;
-  background: rgba(0, 0, 0, 0.5);
-  transition: all 0.35s ease;
-}
-
-@media screen and (max-width: 767px) {
-  .popup {
-    padding: 0 19px;
-    box-sizing: border-box;
-  }
+  justify-content: center;
+  align-items: center;
+  padding: 0 19px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, .5);
+  transition: all .35s ease;
 }

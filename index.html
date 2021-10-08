@@ -13,15 +13,15 @@
   </header>
   <main class="page__content content">
     <section class="profile">
-      <img class="profile__avatar" src="images/avatar.jpg" alt="Жак-Ив Кусто">
+      <img class="profile__avatar" src="images/avatar.jpg" alt="Фото пользователя">
 
       <div class="profile__info">
-        <h2 class="profile__name">Жак-Ив Кусто</h2>
-        <button class="profile__btn-edit" type="button"></button>
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <button class="profile__btn-edit" type="button" aria-label="Редактировать"></button>
         <p class="profile__desc">Исследователь океана</p>
       </div>
 
-      <button class="profile__btn-add" type="button">Добавить</button>
+      <button class="profile__btn-add" type="button" aria-label="Добавить"></button>
     </section>
 
     <section class="elements">
@@ -31,7 +31,7 @@
 
           <div class="element__info">
             <h2 class="element__title">Карачаевск</h2>
-            <button class="element__btn-like" type="button">Like</button>
+            <button class="element__btn-like" type="button" aria-label="Нравится"></button>
           </div>
         </li>
 
@@ -40,7 +40,7 @@
 
           <div class="element__info">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__btn-like" type="button">Like</button>
+            <button class="element__btn-like" type="button" aria-label="Нравится"></button>
           </div>
         </li>
 
@@ -49,7 +49,7 @@
 
           <div class="element__info">
             <h2 class="element__title">Домбай</h2>
-            <button class="element__btn-like" type="button">Like</button>
+            <button class="element__btn-like" type="button" aria-label="Нравится"></button>
           </div>
         </li>
 
@@ -58,7 +58,7 @@
 
           <div class="element__info">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__btn-like" type="button">Like</button>
+            <button class="element__btn-like" type="button" aria-label="Нравится"></button>
           </div>
         </li>
 
@@ -67,7 +67,7 @@
 
           <div class="element__info">
             <h2 class="element__title">Домбай</h2>
-            <button class="element__btn-like" type="button">Like</button>
+            <button class="element__btn-like" type="button" aria-label="Нравится"></button>
           </div>
         </li>
 
@@ -76,7 +76,7 @@
 
           <div class="element__info">
             <h2 class="element__title">Карачаево-Черкесия</h2>
-            <button class="element__btn-like" type="button">Like</button>
+            <button class="element__btn-like" type="button" aria-label="Нравится"></button>
           </div>
         </li>
       </ul>
@@ -84,17 +84,20 @@
   </main>
 
   <div class="popup">
-    <form class="popup__container">
-      <button class="popup__btn-close" type="button">Закрыть</button>
+    <div class="popup__container">
+      <button class="popup__btn-close" type="button" aria-label="Закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input class="popup__field" type="text" name="name">
-      <input class="popup__field" type="text" name="job">
-      <button class="popup__btn-submit" type="submit">Сохранить</button>
-    </form>
+
+      <form class="popup__form" name="form-edit-profile">
+        <input class="popup__field" type="text" name="name" id="name">
+        <input class="popup__field" type="text" name="job" id="job">
+        <button class="popup__btn-submit" type="submit" aria-label="Сохранить">Сохранить</button>
+      </form>
+    </div>
   </div>
 
   <footer class="footer">
-    <p class="footer__copyright">© 2020 Mesto Russia</p>
+    <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
 
   <script src="script/index.js"></script>

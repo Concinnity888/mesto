@@ -6,21 +6,26 @@
   height: 24px;
   box-sizing: border-box;
   background-color: transparent;
-  background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 1.328 2.604 8.767 1.283 7.419 8.66 0 10 1.328ZM0 10l1.962-.588L.585 8.083 0 10Z' fill='%23fff'/%3E%3C/svg%3E");
+  background-image: url('../../../images/btn-edit.svg');
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 0;
   border: solid 1px #ffffff;
-  transition: all 0.35s ease;
+  transition: all .35s ease;
   cursor: pointer;
 }
 
 .profile__btn-edit:hover {
-  opacity: 0.6;
+  opacity: .6;
 }
 
 @media screen and (max-width: 767px) {
   .profile__btn-edit {
-    margin-top: 8px;
+    position: absolute;
+    top: 8px;
+    right: 19px;
+    width: 18px;
+    height: 18px;
+    margin-top: 0;
   }
 }
