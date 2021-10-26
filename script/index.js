@@ -32,30 +32,32 @@ const popupEditProfile = document.querySelector('.popup-edit-profile');
 const popupAdd = document.querySelector('.popup-add');
 const popupGallery = document.querySelector('.popup-gallery');
 const formEditProfile = document.querySelector('.popup__form-edit-profile');
-const nameInput = document.querySelector('#name');
-const jobInput = document.querySelector('#job');
-const nameProfile = document.querySelector('.profile__name');
-const jobProfile = document.querySelector('.profile__desc');
+const nameInput = formEditProfile.querySelector('#name');
+const jobInput = formEditProfile.querySelector('#job');
+const profile = document.querySelector('.profile');
+const nameProfile = profile.querySelector('.profile__name');
+const jobProfile = profile.querySelector('.profile__desc');
 const formAdd = document.querySelector('.popup__form-add');
-const titleInput = document.querySelector('#title');
-const linkInput = document.querySelector('#link');
+const titleInput = formAdd.querySelector('#title');
+const linkInput = formAdd.querySelector('#link');
 const elements = document.querySelector('.elements__list');
+const elementTemplate = document.querySelector('#element').content;
 
-function openPopup (popup) {
+function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
-function closePopup (popup) {
+function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-function popupClickHandler (evt) {
+function popupClickHandler(evt) {
   if (evt.target.classList.contains('popup')) {
     closePopup(evt.target);
   }
 }
 
-function formEditProfileSubmitHandler (evt) {
+function formEditProfileSubmitHandler(evt) {
   evt.preventDefault();
 
   nameProfile.textContent = nameInput.value;
@@ -64,41 +66,46 @@ function formEditProfileSubmitHandler (evt) {
   closePopup(popupEditProfile);
 }
 
-function formAddSubmitHandler (evt) {
+function formAddSubmitHandler(evt) {
   evt.preventDefault();
 
-  renderElement(titleInput.value, linkInput.value);
+  const el = {
+    name: titleInput.value,
+    link: linkInput.value
+  }
+
+  renderPrependElement(el);
   closePopup(popupAdd);
 
   evt.target.reset();
 }
 
-function btnEditClickHandler (evt) {
+function btnEditClickHandler(evt) {
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 
   openPopup(popupEditProfile);
 }
 
-function btnAddClickHandler (evt) {
+function btnAddClickHandler(evt) {
   openPopup(popupAdd);
 }
 
-function btnCloseClickHandler (evt) {
+function btnCloseClickHandler(evt) {
   const popup = evt.target.closest('.popup');
   closePopup(popup);
 }
 
-function btnLikeClickHandler (evt) {
+function btnLikeClickHandler(evt) {
   evt.target.classList.toggle('element__btn-like_active');
 }
 
-function btnRemoveClickHandler (evt) {
+function btnRemoveClickHandler(evt) {
   const element = evt.target.closest('.element');
   element.remove();
 }
 
-function btnOpenPopupGalleryClickHandler (evt) {
+function btnOpenPopupGalleryClickHandler(evt) {
   const link = evt.target.src;
   const title = evt.target.alt;
 
@@ -121,13 +128,12 @@ btnsClosePopup.forEach(btnClosePopup => {
   btnClosePopup.addEventListener('click', btnCloseClickHandler);
 });
 
-function createElement(name, link) {
-  const elementTemplate = document.querySelector('#element').content;
+function createElement(el) {
   const element = elementTemplate.querySelector('.element').cloneNode(true);
 
-  element.querySelector('.element__photo').src = link;
-  element.querySelector('.element__photo').alt = name;
-  element.querySelector('.element__title').textContent = name;
+  element.querySelector('.element__photo').src = el.link;
+  element.querySelector('.element__photo').alt = el.name;
+  element.querySelector('.element__title').textContent = el.name;
   element.querySelector('.element__photo').addEventListener('click', btnOpenPopupGalleryClickHandler);
   element.querySelector('.element__btn-like').addEventListener('click', btnLikeClickHandler);
   element.querySelector('.element__btn-remove').addEventListener('click', btnRemoveClickHandler);
@@ -135,13 +141,18 @@ function createElement(name, link) {
   return element;
 }
 
-function renderElement(name, link) {
-  const element = createElement(name, link);
+function renderAppendElement(el) {
+  const element = createElement(el);
   elements.append(element);
 }
 
+function renderPrependElement(el) {
+  const element = createElement(el);
+  elements.prepend(element);
+}
+
 initialCards.forEach(el => {
-  renderElement(el.name, el.link);
+  renderAppendElement(el);
 });
 
 window.addEventListener('load', () => {
