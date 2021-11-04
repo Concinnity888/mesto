@@ -12,6 +12,7 @@
   border-radius: 2px;
   transition: all .35s ease;
   cursor: pointer;
+  outline: none;
 }
 
 .profile__btn-add:hover {

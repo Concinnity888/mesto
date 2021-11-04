@@ -45,10 +45,12 @@ const elementTemplate = document.querySelector('#element').content;
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', (evt) => btnEscHandler(evt, popup));
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', (evt) => btnEscHandler(evt, popup));
 }
 
 function popupClickHandler(evt) {
@@ -114,6 +116,12 @@ function btnOpenPopupGalleryClickHandler(evt) {
   popupGallery.querySelector('.popup__title-image').textContent = title;
 
   openPopup(popupGallery);
+}
+
+function btnEscHandler(evt, popup) {
+  if (evt.key === 'Escape') {
+    closePopup(popup);
+  }
 }
 
 btnEdit.addEventListener('click', btnEditClickHandler);

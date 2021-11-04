@@ -13,6 +13,7 @@
   border: solid 1px #ffffff;
   transition: all .35s ease;
   cursor: pointer;
+  outline: none;
 }
 
 .profile__btn-edit:hover {
