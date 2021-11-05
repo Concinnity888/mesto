@@ -27,7 +27,7 @@ const initialCards = [
 
 const btnEdit = document.querySelector('.profile__btn-edit');
 const btnAdd = document.querySelector('.profile__btn-add');
-const btnsClosePopup = document.querySelectorAll('.popup__btn-close');
+const closePopupBtns = document.querySelectorAll('.popup__btn-close');
 const popupEditProfile = document.querySelector('.popup-edit-profile');
 const popupAdd = document.querySelector('.popup-add');
 const popupGallery = document.querySelector('.popup-gallery');
@@ -45,12 +45,12 @@ const elementTemplate = document.querySelector('#element').content;
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', (evt) => btnEscHandler(evt, popup));
+  document.addEventListener('keydown', closeByEscape);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', (evt) => btnEscHandler(evt, popup));
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 function popupClickHandler(evt) {
@@ -80,6 +80,9 @@ function formAddSubmitHandler(evt) {
   closePopup(popupAdd);
 
   evt.target.reset();
+  const btnSubmit = formAdd.querySelector('.popup__btn-submit');
+  btnSubmit.classList.add('popup__btn-submit_invalid');
+  btnSubmit.disabled = true;
 }
 
 function btnEditClickHandler(evt) {
@@ -118,9 +121,10 @@ function btnOpenPopupGalleryClickHandler(evt) {
   openPopup(popupGallery);
 }
 
-function btnEscHandler(evt, popup) {
+function closeByEscape(evt) {
   if (evt.key === 'Escape') {
-    closePopup(popup);
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
 }
 
@@ -132,17 +136,18 @@ popupEditProfile.addEventListener('click', popupClickHandler);
 popupAdd.addEventListener('click', popupClickHandler);
 popupGallery.addEventListener('click', popupClickHandler);
 
-btnsClosePopup.forEach(btnClosePopup => {
+closePopupBtns.forEach(btnClosePopup => {
   btnClosePopup.addEventListener('click', btnCloseClickHandler);
 });
 
 function createElement(el) {
   const element = elementTemplate.querySelector('.element').cloneNode(true);
+  const elementPhoto = element.querySelector('.element__photo');
 
-  element.querySelector('.element__photo').src = el.link;
-  element.querySelector('.element__photo').alt = el.name;
+  elementPhoto.src = el.link;
+  elementPhoto.alt = el.name;
   element.querySelector('.element__title').textContent = el.name;
-  element.querySelector('.element__photo').addEventListener('click', btnOpenPopupGalleryClickHandler);
+  elementPhoto.addEventListener('click', btnOpenPopupGalleryClickHandler);
   element.querySelector('.element__btn-like').addEventListener('click', btnLikeClickHandler);
   element.querySelector('.element__btn-remove').addEventListener('click', btnRemoveClickHandler);
 
