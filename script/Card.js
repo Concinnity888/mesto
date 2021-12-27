@@ -1,4 +1,6 @@
 const popupGallery = document.querySelector('.popup-gallery');
+const popupElementPhoto = popupGallery.querySelector('.popup__photo');
+const popupElementTitle = popupGallery.querySelector('.popup__title-image');
 
 export default class Card {
   constructor(el, cardSelector, openPopup) {
@@ -22,9 +24,9 @@ export default class Card {
     const link = evt.target.src;
     const title = evt.target.alt;
 
-    popupGallery.querySelector('.popup__photo').src = link;
-    popupGallery.querySelector('.popup__photo').alt = title;
-    popupGallery.querySelector('.popup__title-image').textContent = title;
+    popupElementPhoto.src = link;
+    popupElementPhoto.alt = title;
+    popupElementTitle.textContent = title;
 
     this._openPopup(popupGallery);
   }
