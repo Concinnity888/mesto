@@ -40,14 +40,14 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closeByEscape);
 }
 
-function formEditProfileSubmitHandler(evt) {
+function submitFormEditProfile(evt) {
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
 
   closePopup(popupEditProfile);
 }
 
-function formAddSubmitHandler(evt) {
+function submitFormAdd(evt) {
   const el = {
     name: titleInput.value,
     link: linkInput.value,
@@ -60,14 +60,14 @@ function formAddSubmitHandler(evt) {
   evt.target.reset();
 }
 
-function btnEditClickHandler(evt) {
+function pressBtnEdit(evt) {
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 
   openPopup(popupEditProfile);
 }
 
-function btnAddClickHandler(evt) {
+function pressBtnAdd(evt) {
   openPopup(popupAdd);
 }
 
@@ -78,10 +78,10 @@ function closeByEscape(evt) {
   }
 }
 
-btnEdit.addEventListener('click', btnEditClickHandler);
-btnAdd.addEventListener('click', btnAddClickHandler);
-formEditProfile.addEventListener('submit', formEditProfileSubmitHandler);
-formAdd.addEventListener('submit', formAddSubmitHandler);
+btnEdit.addEventListener('click', pressBtnEdit);
+btnAdd.addEventListener('click', pressBtnAdd);
+formEditProfile.addEventListener('submit', submitFormEditProfile);
+formAdd.addEventListener('submit', submitFormAdd);
 
 function createCard(el) {
   const card = new Card(el, '#element', openPopup);
@@ -111,7 +111,5 @@ forms.forEach((form) => {
 });
 
 window.addEventListener('load', () => {
-  document
-    .querySelectorAll('.popup')
-    .forEach((popup) => popup.classList.add('popup_transition'));
+  popups.forEach((popup) => popup.classList.add('popup_transition'));
 });
