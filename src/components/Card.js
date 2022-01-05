@@ -1,7 +1,3 @@
-const popupGallery = document.querySelector('.popup-gallery');
-const popupElementPhoto = popupGallery.querySelector('.popup__photo');
-const popupElementTitle = popupGallery.querySelector('.popup__title-image');
-
 export default class Card {
   constructor(el, cardSelector, openPopup) {
     this._cardSelector = cardSelector;
@@ -13,8 +9,7 @@ export default class Card {
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
-      .content
-      .querySelector('.element')
+      .content.querySelector('.element')
       .cloneNode(true);
 
     return cardElement;
@@ -24,11 +19,7 @@ export default class Card {
     const link = evt.target.src;
     const title = evt.target.alt;
 
-    popupElementPhoto.src = link;
-    popupElementPhoto.alt = title;
-    popupElementTitle.textContent = title;
-
-    this._openPopup(popupGallery);
+    this._openPopup({ link, title });
   }
 
   _btnLikeClickHandler(evt) {
@@ -41,9 +32,15 @@ export default class Card {
   }
 
   _setEventListeners(elementPhoto) {
-    elementPhoto.addEventListener('click', (evt) => this._btnOpenPopupGalleryClickHandler(evt));
-    this._element.querySelector('.element__btn-like').addEventListener('click', (evt) => this._btnLikeClickHandler(evt));
-    this._element.querySelector('.element__btn-remove').addEventListener('click', (evt) => this._btnRemoveClickHandler(evt));
+    elementPhoto.addEventListener('click', (evt) =>
+      this._btnOpenPopupGalleryClickHandler(evt)
+    );
+    this._element
+      .querySelector('.element__btn-like')
+      .addEventListener('click', (evt) => this._btnLikeClickHandler(evt));
+    this._element
+      .querySelector('.element__btn-remove')
+      .addEventListener('click', (evt) => this._btnRemoveClickHandler(evt));
   }
 
   generateCard() {
