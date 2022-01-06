@@ -1,5 +1,4 @@
 import './index.css';
-import { initialCards } from '../utils/data.js';
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -10,6 +9,7 @@ import {
   FormAddValidator,
 } from '../components/FormValidator.js';
 import {
+  initialCards,
   configForm,
   cardListSelector,
   btnAdd,
@@ -25,16 +25,19 @@ const cardList = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item, '#element', (data) =>
-        popupGallery.open(data)
-      );
-      const cardElement = card.generateCard();
+      const cardElement = createCard(item);
       cardList.addItem(cardElement);
     },
   },
   cardListSelector
 );
 cardList.renderItems();
+
+function createCard(item) {
+  const card = new Card(item, '#element', (item) => popupGallery.open(item));
+  const cardElement = card.generateCard();
+  return cardElement;
+}
 
 const popupAdd = new PopupWithForm('.popup-add', (evt) => submitFormAdd(evt));
 popupAdd.setEventListeners();
@@ -68,8 +71,7 @@ function submitFormAdd(el) {
     link: el.link,
   };
 
-  const card = new Card(cardData, '#element', () => popupGallery.open());
-  const cardElement = card.generateCard();
+  const cardElement = createCard(cardData);
   cardList.addItem(cardElement);
 }
 
