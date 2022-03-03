@@ -12,12 +12,15 @@
   </header>
   <main class="page__content content">
     <section class="profile">
-      <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Фото пользователя">
+      <div class="profile__wrap-avatar">
+        <img class="profile__avatar" src="" alt="">
+        <button class="profile__btn-update-avatar" type="button" aria-label="Загрузить аватар"></button>
+      </div>
 
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <h1 class="profile__name"></h1>
         <button class="profile__btn-edit" type="button" aria-label="Редактировать"></button>
-        <p class="profile__desc">Исследователь океана</p>
+        <p class="profile__desc"></p>
       </div>
 
       <button class="profile__btn-add" type="button" aria-label="Добавить"></button>
@@ -74,6 +77,29 @@
     </div>
   </div>
 
+  <div class="popup popup-update-avatar">
+    <div class="popup__container">
+      <button class="popup__btn-close" type="button" aria-label="Закрыть"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+
+      <form class="popup__form popup__form-update-avatar" name="form-update-avatar" novalidate>
+        <div class="popup__field-wrap">
+          <input class="popup__field" type="url" name="avatar-link" id="avatar-link" required>
+          <span class="popup__error-message" id="avatar-link-error"></span>
+        </div>
+        <button class="popup__btn-submit" type="submit" aria-label="Сохранить">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup-confirm">
+    <div class="popup__container">
+      <button class="popup__btn-close" type="button" aria-label="Закрыть"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button class="popup__btn-submit" type="button" aria-label="Сохранить">Да</button>
+    </div>
+  </div>
+
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
@@ -84,7 +110,10 @@
 
       <div class="element__info">
         <h2 class="element__title"></h2>
-        <button class="element__btn-like" type="button" aria-label="Нравится"></button>
+        <div class="element__wrap-like">
+          <button class="element__btn-like" type="button" aria-label="Нравится"></button>
+          <span class="element__counter-like"></span>
+        </div>
         <button class="element__btn-remove" type="button" aria-label="Удалить"></button>
       </div>
     </li>

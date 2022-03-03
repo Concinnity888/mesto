@@ -10,10 +10,10 @@
   background-repeat: no-repeat;
   background-position: center;
   background-color: transparent;
-  transition: all .35s ease;
+  transition: all 0.35s ease;
   cursor: pointer;
 }
 
 .element__btn-remove:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
