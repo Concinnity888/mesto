@@ -5,10 +5,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupConfirm from '../components/PopupConfirm.js';
 import UserInfo from '../components/UserInfo.js';
-import {
-  FormEditValidator,
-  FormAddValidator,
-} from '../components/FormValidator.js';
+import FormValidator from '../components/FormValidator.js';
 import {
   configForm,
   cardListSelector,
@@ -88,7 +85,10 @@ function handlerConfirm(element, id) {
 function removeCard(element, id) {
   api
     .removeCard(id)
-    .then(() => element.remove())
+    .then(() => {
+      element.remove();
+      popupConfirm.close();
+    })
     .catch((err) => console.log(err));
 }
 
@@ -125,7 +125,7 @@ btnEdit.addEventListener('click', () => {
 });
 
 function submitFormEditProfile(data) {
-  setLoading(true, '.popup-edit-profile');
+  popupEditProfile.renderLoading(true);
 
   api
     .editProfile(data)
@@ -135,7 +135,7 @@ function submitFormEditProfile(data) {
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      setLoading(false, '.popup-edit-profile');
+      popupEditProfile.renderLoading(false);
     });
 }
 
@@ -144,7 +144,7 @@ function submitFormAdd(el) {
     name: el.title,
     link: el.link,
   };
-  setLoading(true, '.popup-add');
+  popupAdd.renderLoading(true);
 
   api
     .addNewCard(cardData)
@@ -155,50 +155,40 @@ function submitFormAdd(el) {
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      setLoading(false, '.popup-add');
+      popupAdd.renderLoading(false, 'Создать');
     });
 }
 
 function submitFormUpdateAvatar(data) {
   const avatar = data['avatar-link'];
-  setLoading(true, '.popup-update-avatar');
+  popupUpdateAvatar.renderLoading(true);
 
   api
     .updateAvatar(avatar)
-    .then(({ name, about, avatar }) => {
-      userInfo.setUserInfo({ name, about, avatar });
+    .then((res) => {
+      userInfo.setUserInfo(res);
       popupUpdateAvatar.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      setLoading(false, '.popup-update-avatar');
+      popupUpdateAvatar.renderLoading(false);
     });
 }
 
-const forms = Array.from(document.querySelectorAll(configForm.formSelector));
-forms.forEach((form) => {
-  const formValidator = form.classList.contains('popup__form-edit-profile')
-    ? new FormEditValidator(configForm, form)
-    : new FormAddValidator(configForm, form);
+const formValidators = {};
 
-  formValidator.enableValidation();
-});
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    const formName = formElement.getAttribute('name');
 
-function setLoading(isLoading, selectorPopup) {
-  const btnSubmit = document
-    .querySelector(selectorPopup)
-    .querySelector('.popup__btn-submit');
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
 
-  if (isLoading) {
-    btnSubmit.textContent = 'Сохранение...';
-  } else {
-    if (selectorPopup === '.popup-add') {
-      btnSubmit.textContent = 'Создать';
-    } else {
-      btnSubmit.textContent = 'Сохранить';
-    }
-  }
-}
+enableValidation(configForm);
 
 window.addEventListener('load', () => {
   popups.forEach((popup) => popup.classList.add('popup_transition'));

@@ -22,6 +22,16 @@ export default class PopupWithForm extends Popup {
     });
   }
 
+  renderLoading(isLoading, buttonText = 'Сохранить') {
+    const btnSubmit = this._form.querySelector('.popup__btn-submit');
+
+    if (isLoading) {
+      btnSubmit.textContent = 'Сохранение...';
+    } else {
+      btnSubmit.textContent = buttonText;
+    }
+  }
+
   close() {
     super.close();
     this._form.reset();

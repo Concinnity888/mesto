@@ -10,6 +10,7 @@ export default class Card {
     this._userId = user._id;
     this._handlerConfirm = handlerConfirm;
     this._changeLikes = changeLikes;
+    this._counterLike = '';
   }
 
   _getTemplate() {
@@ -21,40 +22,39 @@ export default class Card {
     return cardElement;
   }
 
-  _btnOpenPopupGalleryClickHandler(evt) {
-    const link = evt.target.src;
-    const title = evt.target.alt;
+  _handleImageClick(evt) {
+    const link = this._link;
+    const title = this._name;
 
     this._openPopup({ link, title });
   }
 
-  _btnLikeClickHandler(evt) {
+  _handleLike(evt) {
     const isLike = this._getStatusLike(this._likes);
     const btnLike = evt.target;
     this._changeLikes(this, isLike, this._idCard, btnLike);
   }
 
-  _btnRemoveClickHandler(evt) {
+  _handleCardRemove(evt) {
     const element = evt.target.closest('.element');
     this._handlerConfirm(element, this._idCard);
   }
 
   _setLikes(likes) {
     const quantity = likes.length;
-    this._element.querySelector('.element__counter-like').textContent =
-      quantity;
+    this._counterLike.textContent = quantity;
   }
 
   _setEventListeners(elementPhoto) {
     elementPhoto.addEventListener('click', (evt) =>
-      this._btnOpenPopupGalleryClickHandler(evt)
+      this._handleImageClick(evt)
     );
     this._element
       .querySelector('.element__btn-like')
-      .addEventListener('click', (evt) => this._btnLikeClickHandler(evt));
+      .addEventListener('click', (evt) => this._handleLike(evt));
     this._element
       .querySelector('.element__btn-remove')
-      .addEventListener('click', (evt) => this._btnRemoveClickHandler(evt));
+      .addEventListener('click', (evt) => this._handleCardRemove(evt));
   }
 
   updateLikes({ likes }, btnLike, isLike = false) {
@@ -79,6 +79,7 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._counterLike = this._element.querySelector('.element__counter-like');
     const elementPhoto = this._element.querySelector('.element__photo');
     elementPhoto.src = this._link;
     elementPhoto.alt = this._name;

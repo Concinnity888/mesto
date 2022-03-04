@@ -9,23 +9,18 @@ export default class PopupConfirm extends Popup {
     this._element = '';
   }
 
-  _btnConfirmHandler() {
+  _confirmDeleting() {
     this._handlerConfirm(this._element, this._id);
-    this.close();
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._btnConfirm.addEventListener('click', () => this._btnConfirmHandler());
+    this._btnConfirm.addEventListener('click', () => this._confirmDeleting());
   }
 
   open(element, id) {
     this._id = id;
     this._element = element;
     super.open();
-  }
-
-  close() {
-    super.close();
   }
 }

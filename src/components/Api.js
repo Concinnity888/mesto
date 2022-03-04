@@ -1,15 +1,15 @@
-const onError = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-
-  return Promise.reject(`Ошибка: ${res.status}`);
-};
-
 export default class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
+  }
+
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   getUser() {
@@ -17,7 +17,7 @@ export default class Api {
       headers: {
         ...this._headers,
       },
-    }).then(onError);
+    }).then(this._checkResponse);
   }
 
   getInitialCards() {
@@ -25,7 +25,7 @@ export default class Api {
       headers: {
         ...this._headers,
       },
-    }).then(onError);
+    }).then(this._checkResponse);
   }
 
   editProfile(user) {
@@ -38,7 +38,7 @@ export default class Api {
         name: user.name,
         about: user.desc,
       }),
-    }).then(onError);
+    }).then(this._checkResponse);
   }
 
   addNewCard(newCard) {
@@ -51,7 +51,7 @@ export default class Api {
         name: newCard.name,
         link: newCard.link,
       }),
-    }).then(onError);
+    }).then(this._checkResponse);
   }
 
   removeCard(idCard) {
@@ -60,7 +60,7 @@ export default class Api {
       headers: {
         ...this._headers,
       },
-    }).then(onError);
+    }).then(this._checkResponse);
   }
 
   addLike(idCard) {
@@ -69,7 +69,7 @@ export default class Api {
       headers: {
         ...this._headers,
       },
-    }).then(onError);
+    }).then(this._checkResponse);
   }
 
   removeLike(idCard) {
@@ -78,7 +78,7 @@ export default class Api {
       headers: {
         ...this._headers,
       },
-    }).then(onError);
+    }).then(this._checkResponse);
   }
 
   updateAvatar(avatar) {
@@ -90,6 +90,6 @@ export default class Api {
       body: JSON.stringify({
         avatar,
       }),
-    }).then(onError);
+    }).then(this._checkResponse);
   }
 }
