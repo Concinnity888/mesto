@@ -7,7 +7,7 @@ export default class Card {
     this._likes = el.likes || [];
     this._openPopup = openPopup;
     this._ownerId = el?.owner?._id || '';
-    this._userId = user?._id || '';
+    this._userId = user._id;
     this._handlerConfirm = handlerConfirm;
     this._changeLikes = changeLikes;
   }

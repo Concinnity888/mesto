@@ -125,16 +125,17 @@ btnEdit.addEventListener('click', () => {
 });
 
 function submitFormEditProfile(data) {
-  setLoading(true);
+  setLoading(true, '.popup-edit-profile');
 
   api
     .editProfile(data)
     .then((res) => {
       userInfo.setUserInfo(res);
+      popupEditProfile.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      setLoading(false);
+      setLoading(false, '.popup-edit-profile');
     });
 }
 
@@ -143,32 +144,34 @@ function submitFormAdd(el) {
     name: el.title,
     link: el.link,
   };
-  setLoading(true, true);
+  setLoading(true, '.popup-add');
 
   api
     .addNewCard(cardData)
-    .then(() => {
-      const cardElement = createCard(cardData);
+    .then((card) => {
+      const cardElement = createCard(card, userInfo.getUserInfo());
       cardList.addItem(cardElement);
+      popupAdd.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      setLoading(false, true);
+      setLoading(false, '.popup-add');
     });
 }
 
 function submitFormUpdateAvatar(data) {
   const avatar = data['avatar-link'];
-  setLoading(true);
+  setLoading(true, '.popup-update-avatar');
 
   api
     .updateAvatar(avatar)
     .then(({ name, about, avatar }) => {
       userInfo.setUserInfo({ name, about, avatar });
+      popupUpdateAvatar.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      setLoading(false);
+      setLoading(false, '.popup-update-avatar');
     });
 }
 
@@ -181,13 +184,15 @@ forms.forEach((form) => {
   formValidator.enableValidation();
 });
 
-function setLoading(isLoading, isPopupAdd = false) {
-  const btnSubmit = document.querySelector('.popup__btn-submit');
+function setLoading(isLoading, selectorPopup) {
+  const btnSubmit = document
+    .querySelector(selectorPopup)
+    .querySelector('.popup__btn-submit');
 
   if (isLoading) {
     btnSubmit.textContent = 'Сохранение...';
   } else {
-    if (isPopupAdd) {
+    if (selectorPopup === '.popup-add') {
       btnSubmit.textContent = 'Создать';
     } else {
       btnSubmit.textContent = 'Сохранить';
