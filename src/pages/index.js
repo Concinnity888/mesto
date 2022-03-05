@@ -96,6 +96,7 @@ const popupAdd = new PopupWithForm('.popup-add', (evt) => submitFormAdd(evt));
 popupAdd.setEventListeners();
 btnAdd.addEventListener('click', () => {
   popupAdd.open();
+  formValidators['form-add'].resetValidation();
 });
 
 const popupUpdateAvatar = new PopupWithForm('.popup-update-avatar', (evt) =>
@@ -104,6 +105,7 @@ const popupUpdateAvatar = new PopupWithForm('.popup-update-avatar', (evt) =>
 popupUpdateAvatar.setEventListeners();
 btnUpdateAvatar.addEventListener('click', () => {
   popupUpdateAvatar.open();
+  formValidators['form-update-avatar'].resetValidation();
 });
 
 const popupEditProfile = new PopupWithForm('.popup-edit-profile', (evt) =>
@@ -122,6 +124,7 @@ btnEdit.addEventListener('click', () => {
   userNameInput.value = userName;
   userDescInput.value = userDesc;
   popupEditProfile.open();
+  formValidators['form-edit-profile'].resetValidation();
 });
 
 function submitFormEditProfile(data) {
